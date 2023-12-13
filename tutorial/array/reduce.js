@@ -11,6 +11,12 @@
 - initialValue (tùy chọn): Giá trị khởi đầu của accumulator.
 */
 
+// Trả về một data mới với kết quả: là sau khi lặp qua và thực hiện thao tác tính toán trên mỗi lần lặp.
+
+// Điểm lưu ý:
+// Trả về một data(object, array, string, ...) mới so với array ban đầu.
+// .reduce sẽ không làm thay đổi array ban đầu.
+
 // Mảng chứa các số nguyên dương
 const numbers = [1, 2, 3, 4, 5];
 
@@ -24,3 +30,49 @@ const array1=[1,2,3,4,6];
 const initialValue=0;
 const sumWithInitial = array1.reduce((accumulator,currentValue)=>accumulator + currentValue,initialValue);
 console.log(sumWithInitial);
+
+//============= array new
+const beforeColors = ["red", "blue", "green", "black"];
+
+const afterColors = beforeColors.reduce((currentColors, item, index) => {
+  if (item.startsWith("b")) {
+    return [...currentColors, `hello ${item}`];
+  }
+  return currentColors;
+}, []);
+
+console.log('beforeColors', beforeColors);
+// beforeColors ["red", "blue", "green", "black"]
+
+console.log('afterColors', afterColors);
+// afterColors ["hello blue", "hello black"]
+//========== object new
+const beforeColors1 = ["red", "blue", "green", "black"];
+
+const afterColorObj = beforeColors1.reduce((currentColors, item, index) => {
+  if (item.startsWith("b")) {
+    return {
+      ...currentColors,
+      [`color_${item}`]: `hello ${item}`,
+    };
+  }
+  return currentColors;
+}, {});
+
+console.log('beforeColors', beforeColors1);
+// beforeColors ["red", "blue", "green", "black"]
+
+console.log('afterColorObj', afterColorObj);
+// afterColorObj {color_blue: "hello blue", color_black: "hello black"}
+//============== string new
+const beforeColors2 = ["red", "blue", "green", "black"];
+
+const afterColorStr = beforeColors2.reduce((currentColors, item, index) => {
+  return `${currentColors} ${item}`;
+}, '');
+
+console.log('beforeColors', beforeColors2);
+// beforeColors ["red", "blue", "green", "black"]
+
+console.log('afterColorStr', afterColorStr);
+// afterColorStr "red blue green black "
